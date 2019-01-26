@@ -42,6 +42,8 @@ public class Bonus : MonoBehaviour
     private void OnEnable()
     {
         rb = GetComponent<Rigidbody>();
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
     }
 
     public void PickUpBonus(Direction pickupDirection)

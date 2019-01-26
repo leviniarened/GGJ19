@@ -36,8 +36,8 @@ public class GarbageContainer : MonoBehaviour
 
     private void OnDisable()
     {
-        if (animatorController != null)
-            animatorController.Play("Idle");
+        //if (animatorController != null)
+        //    animatorController.Play("Idle");
     }
 
 
