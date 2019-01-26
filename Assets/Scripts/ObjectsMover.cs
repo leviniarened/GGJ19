@@ -9,6 +9,7 @@ public class ObjectsMover : MonoBehaviour
 
     public int ObjectsSpeed;
     public int EnemySpeed;
+    public int SpeedMultiplier = 1;
 
     [SerializeField]
     private Transform _objectsDestroyPoint, _enemy;
@@ -27,11 +28,11 @@ public class ObjectsMover : MonoBehaviour
         for (int i = 0; i < _levelGenerator.ActiveMovingObjects.Count; i++)
         {
             Transform obj = _levelGenerator.ActiveMovingObjects[i].transform;
-            obj.Translate(ObjectsSpeed * Time.deltaTime, 0, 0);
+            obj.Translate(SpeedMultiplier * ObjectsSpeed * Time.deltaTime, 0, 0);
             if (obj.position.x > _objectsDestroyPoint.position.x)
                 _levelGenerator.ReturnObjectToPool(obj.gameObject);
         }
 
-        _enemy.transform.Translate(EnemySpeed * Time.deltaTime, 0, 0);
+        _enemy.transform.Translate(SpeedMultiplier * EnemySpeed * Time.deltaTime, 0, 0);
     }
 }

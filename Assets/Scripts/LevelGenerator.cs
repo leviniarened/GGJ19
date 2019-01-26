@@ -73,6 +73,7 @@ public class LevelGenerator : MonoBehaviour
     {
         GameObject obj = pool.Dequeue();
         _activeMovingObjects.Add(obj);
+        obj.transform.rotation = Quaternion.identity;//восстанавливаем положение объекта - для перевернутого бака например.
         obj.SetActive(true);
         pool.Enqueue(obj);
         return obj;
@@ -106,6 +107,6 @@ public class LevelGenerator : MonoBehaviour
 
     private void SpawnObjectFromPool(Queue<GameObject> pool, int ZPosition)
     {
-        GetObjectFromPool(pool).transform.position = new Vector3(_spawnDistance, 0, (-1 * Random.Range(0, 2)) * ZPosition);
+        GetObjectFromPool(pool).transform.position = new Vector3(_spawnDistance, 0, -ZPosition + (2 * Random.Range(0, 2)) * ZPosition);
     }
 }
