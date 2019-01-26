@@ -19,10 +19,18 @@ public class LevelGenerator : MonoBehaviour
     private List<GameObject> _activeMovingObjects;
     public List<GameObject> ActiveMovingObjects { get => _activeMovingObjects;}
 
+    [SerializeField]
+    private int _houseSpawnDelay, _trashcanSpawnDelay, _treeSpawnDelay,
+        _houseSpawnerPosition, _trashcanSpawnerPosition, _treeSpawnerPosition;
+
+    private const int SpawnTimerDelay = 1;
+    private WaitForSeconds _spawnTimerWait;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
-
         _trashCansPool = new Queue<GameObject>();
         _housesPool = new Queue<GameObject>();
         _treesPool = new Queue<GameObject>();
@@ -32,12 +40,10 @@ public class LevelGenerator : MonoBehaviour
         PopulatePool(_trashCansPool, _trashCanPrefab, _trashCansPoolSize);
         PopulatePool(_housesPool, _housePrefab, _housePoolSize);
         PopulatePool(_treesPool, _treePrefabs, _treesPoolSize);
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        _spawnTimerWait = new WaitForSeconds(SpawnTimerDelay);
+
+        StartCoroutine("SpawnCoroutine");
     }
 
     private void PopulatePool(Queue<GameObject> pool, GameObject prefab, int poolSize)
@@ -58,18 +64,32 @@ public class LevelGenerator : MonoBehaviour
     private GameObject GetObjectFromPool(Queue<GameObject> pool)
     {
         GameObject obj = pool.Dequeue();
+        _activeMovingObjects.Add(obj);
         obj.SetActive(true);
+        pool.Enqueue(obj);
         return obj;
     }
 
-    private void ReturnObjectToPool(GameObject obj, Queue<GameObject> pool)
+    public void ReturnObjectToPool(GameObject obj)
     {
-        pool.Enqueue(obj);
+        _activeMovingObjects.Remove(obj);
         obj.SetActive(false);
     }
 
-    public void DestroyTrashCan(GameObject trashcan)
+    private IEnumerator SpawnCoroutine()
     {
-        ReturnObjectToPool(trashcan, _trashCansPool);
+        int spawnTimer = 0;
+        while (true)
+        {
+            spawnTimer++;
+            Debug.Log("корутина сделала один проход");
+
+            if (spawnTimer % _houseSpawnDelay == 0)
+            {
+                GetObjectFromPool(_housesPool).transform.position = new Vector3(10,0, (-1 * Random.Range(0, 2)) * _houseSpawnerPosition);
+            }
+
+            yield return _spawnTimerWait;
+        }
     }
 }

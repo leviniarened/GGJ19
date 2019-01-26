@@ -181,6 +181,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &272207308
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 272207309}
+  m_Layer: 0
+  m_Name: Objects Destroy Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &272207309
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272207308}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 69.8, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 899153269}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,8 +303,9 @@ GameObject:
   m_Component:
   - component: {fileID: 899153269}
   - component: {fileID: 899153268}
+  - component: {fileID: 899153270}
   m_Layer: 0
-  m_Name: Level Generator
+  m_Name: Level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -303,6 +334,12 @@ MonoBehaviour:
   _housePoolSize: 20
   _treesPoolSize: 30
   _trashCansPoolSize: 10
+  _houseSpawnDelay: 5
+  _trashcanSpawnDelay: 5
+  _treeSpawnDelay: 5
+  _houseSpawnerPosition: 15
+  _trashcanSpawnerPosition: 2
+  _treeSpawnerPosition: 3
 --- !u!4 &899153269
 Transform:
   m_ObjectHideFlags: 0
@@ -313,10 +350,27 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 272207309}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &899153270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899153267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f248cf70e5a87944d994b076b1ef7d5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectsSpeed: 4
+  EnemySpeed: 1
+  _objectsDestroyPoint: {fileID: 272207309}
+  _enemy: {fileID: 1682652948}
 --- !u!1 &1554147943
 GameObject:
   m_ObjectHideFlags: 0
