@@ -9,16 +9,25 @@ public class ObjectsMover : MonoBehaviour
 
     public int ObjectsSpeed;
     public int EnemySpeed;
-    public int SpeedMultiplier = 1;
+    public float SpeedMultiplier = 1;
+    [SerializeField]
+    private float _speedMultiplierDecreaseAmount;
+    [SerializeField]
+    private int _speedDecreaseDelay;
+    WaitForSeconds _speedDecreaseWait;
 
     [SerializeField]
     private Transform _objectsDestroyPoint, _enemy;
+
+    private int _maxSpeedMultiplier;
 
 
     // Start is called before the first frame update
     void Start()
     {
         _levelGenerator = FindObjectOfType<LevelGenerator>();
+        _speedDecreaseWait = new WaitForSeconds(_speedDecreaseDelay);
+        _maxSpeedMultiplier = (int)SpeedMultiplier;
     }
 
     // Update is called once per frame
@@ -34,5 +43,14 @@ public class ObjectsMover : MonoBehaviour
         }
 
         _enemy.transform.Translate(SpeedMultiplier * EnemySpeed * Time.deltaTime, 0, 0);
+    }
+
+    private IEnumerator SpeedDecreaseCoroutine()
+    {
+        while(true)
+        {
+            yield return _speedDecreaseWait;
+            SpeedMultiplier -= _speedMultiplierDecreaseAmount;
+        }
     }
 }
