@@ -9,12 +9,12 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField]
     private GameObject _trashCanPrefab, _housePrefab;
     [SerializeField]
-    private GameObject[] _treePrefabs;
+    private GameObject[] _treePrefabs, _bottlePrefabs;
 
     [SerializeField]
-    private int _housePoolSize, _treesPoolSize, _trashCansPoolSize;
+    private int _housePoolSize, _treesPoolSize, _trashCansPoolSize, _bottlesPoolSize;
 
-    private Queue<GameObject> _trashCansPool, _housesPool, _treesPool;
+    private Queue<GameObject> _trashCansPool, _housesPool, _treesPool, _bottlesPool;
 
 
 
@@ -40,12 +40,14 @@ public class LevelGenerator : MonoBehaviour
         _trashCansPool = new Queue<GameObject>();
         _housesPool = new Queue<GameObject>();
         _treesPool = new Queue<GameObject>();
+        _bottlesPool = new Queue<GameObject>();
 
         _activeMovingObjects = new List<GameObject>();
 
         PopulatePool(_trashCansPool, _trashCanPrefab, _trashCansPoolSize);
         PopulatePool(_housesPool, _housePrefab, _housePoolSize);
         PopulatePool(_treesPool, _treePrefabs, _treesPoolSize);
+        PopulatePool(_bottlesPool, _bottlePrefabs, _bottlesPoolSize);
 
         _spawnTimerWait = new WaitForSeconds(SpawnTimerDelay);
 
@@ -80,7 +82,6 @@ public class LevelGenerator : MonoBehaviour
     {
         GameObject obj = pool.Dequeue();
         _activeMovingObjects.Add(obj);
-        obj.transform.rotation = Quaternion.identity;//восстанавливаем положение объекта - для перевернутого бака например.
         obj.SetActive(true);
         pool.Enqueue(obj);
         return obj;
@@ -92,9 +93,14 @@ public class LevelGenerator : MonoBehaviour
         obj.SetActive(false);
     }
 
-    public void SpawnBottle()
+    public GameObject GetBottle()
     {
+        return GetObjectFromPool(_bottlesPool);
+    }
 
+    public void DestroyBottle(GameObject bottle)
+    {
+        ReturnObjectToPool(bottle);
     }
 
     private IEnumerator SpawnCoroutine()
