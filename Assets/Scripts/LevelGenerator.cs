@@ -16,7 +16,8 @@ public class LevelGenerator : MonoBehaviour
 
     private Queue<GameObject> _trashCansPool, _streetSegmentsPool, _bottlesPool;
 
-
+    [SerializeField]
+    private int _amountOfStreetSegmentsAtStart, _distBetweenStreetSegmentsAtStart;
 
     private List<GameObject> _activeMovingObjects;
     public List<GameObject> ActiveMovingObjects { get => _activeMovingObjects;}
@@ -50,8 +51,7 @@ public class LevelGenerator : MonoBehaviour
         PopulatePool(_streetSegmentsPool, _streetSegmentPrefab, _streetSegmentsPoolSize);
         PopulatePool(_bottlesPool, _bottlePrefabs, _bottlesPoolSize);
 
-         _lastStreetSegment = GetObjectFromPool(_streetSegmentsPool).transform;
-        _lastTrashcan = GetObjectFromPool(_trashCansPool).transform;
+        SetFirstObjects();
 
         StartCoroutine("SpawnCoroutine");
     }
@@ -74,6 +74,15 @@ public class LevelGenerator : MonoBehaviour
             pool.Enqueue(instance);
             instance.SetActive(false);
         }
+    }
+
+    private void SetFirstObjects()
+    {
+        for (int i = 1; i < _amountOfStreetSegmentsAtStart; i++)
+            GetObjectFromPool(_streetSegmentsPool).transform.position = new Vector3(_spawnPositionX + _distBetweenStreetSegmentsAtStart*i, 0, 0);
+        
+        _lastStreetSegment = GetObjectFromPool(_streetSegmentsPool).transform;
+        _lastTrashcan = _trashCansPool.Peek().transform;
     }
 
     private GameObject GetObjectFromPool(Queue<GameObject> pool)

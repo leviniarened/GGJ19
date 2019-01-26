@@ -264,6 +264,8 @@ MonoBehaviour:
   _streetSegmentsPoolSize: 10
   _trashCansPoolSize: 25
   _bottlesPoolSize: 12
+  _amountOfStreetSegmentsAtStart: 4
+  _distBetweenStreetSegmentsAtStart: 15
   _spawnPositionX: 10
   _streetSegmentClosestSpawnDist: 10
   _trashcanClosestSpawnDist: 7
@@ -298,12 +300,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f248cf70e5a87944d994b076b1ef7d5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxObjectsSpeed: 4
-  _maxEnemySpeed: 1
-  _minObjectsSpeed: 0
-  _drinkToSpeedTranslateMultiplier: 0.4
-  _maxSpeedModifier: 2
-  _minSpeedModifier: 0.3
+  _baseObjectsSpeed: 2.2
+  _baseEnemySpeed: 2.5
   _objectsDestroyPoint: {fileID: 272207309}
   _enemy: {fileID: 1682652948}
   _drinkSpeedCurve:
@@ -339,6 +337,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _enemySpeedModifier: 0.6
 --- !u!114 &899153271
 MonoBehaviour:
   m_ObjectHideFlags: 0
