@@ -17,8 +17,14 @@ public class Player : MonoBehaviour
 
     float drink = 0.5f;//ranged from 0 to 1
     [SerializeField]
-    float drinkDecreaseParam = 0.1f;
+    float drinkDecreaseParam = 0.01f;
     UIController ui;
+
+
+    [SerializeField]
+    private Animator leftHandAnimator;
+    [SerializeField]
+    private Animator rightHandAnimator;
 
     public void PickUpDrink(float v)
     {
@@ -27,6 +33,24 @@ public class Player : MonoBehaviour
 
     public void PlayPickUpSuccess(BonusType bonus, Direction pickupDirection)
     {
+        if(pickupDirection == Direction.Left)
+        {
+            leftHandAnimator.Play("Drink");
+        }
+        if (pickupDirection == Direction.Right)
+        {
+            rightHandAnimator.Play("Drink");
+        }
+
+        if(bonus == BonusType.Alco)
+        {
+            Drink += 0.1f;
+        }
+        else if(bonus == BonusType.NotAlco)
+        {
+            Drink -= 0.1f;
+        }
+
         Debug.Log("Pickup success " + bonus.ToString() + " " + pickupDirection.ToString());
     }
 
@@ -102,6 +126,9 @@ public class Player : MonoBehaviour
 
     Transform GetClosest(IEnumerable<Transform> obj)
     {
+        if (obj == null)
+            return null;
+
         Transform tMin = null;
         float minDist = Mathf.Infinity;
         Vector3 currentPos = transform.position;

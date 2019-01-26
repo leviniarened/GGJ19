@@ -39,11 +39,22 @@ public class Bonus : MonoBehaviour
         levelGenerator = FindObjectOfType<LevelGenerator>();
     }
 
+    public void InitBonusDirection(Direction dir)
+    {
+        bonusDirection = dir;
+    }
+
     private void OnEnable()
     {
         rb = GetComponent<Rigidbody>();
+        rb.isKinematic = false;
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        rb.isKinematic = true;
     }
 
     public void PickUpBonus(Direction pickupDirection)
@@ -63,7 +74,7 @@ public class Bonus : MonoBehaviour
             return;
         }
 
-        player.PlayPickUpSuccess(thisBonusType, pickupDirection);
+        player.PlayPickUpSuccess(thisBonusType, bonusDirection);
         levelGenerator.ReturnObjectToPool(this.gameObject);
     }
 

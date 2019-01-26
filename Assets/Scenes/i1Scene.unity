@@ -454,6 +454,7 @@ GameObject:
   - component: {fileID: 1880833461}
   - component: {fileID: 1880833460}
   - component: {fileID: 1880833459}
+  - component: {fileID: 1880833462}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -525,6 +526,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1880833462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1880833458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed0396ad956cfb347b986b59f6086d48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftKickKey: 97
+  rightKickKey: 100
+  leftGrabKey: 113
+  rightGrabKey: 101
 --- !u!1 &1891974400
 GameObject:
   m_ObjectHideFlags: 0
@@ -890,6 +907,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1836369965, guid: 860b0f343ef49ef49983ae7ac0abcb2f,
         type: 3}
+    - target: {fileID: 5263773363780700226, guid: 919958a22c24dc94b819fc83858e3595,
+        type: 3}
+      propertyPath: containerDirection
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 919958a22c24dc94b819fc83858e3595, type: 3}
 --- !u!1001 &5312058187383777138
@@ -904,20 +926,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5312058186514047351, guid: f874c4678eecc2740b582d417e4a376e,
+        type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000,
+        type: 0}
     - target: {fileID: 5312058186514047349, guid: f874c4678eecc2740b582d417e4a376e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1.326
       objectReference: {fileID: 0}
     - target: {fileID: 5312058186514047349, guid: f874c4678eecc2740b582d417e4a376e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.647
       objectReference: {fileID: 0}
     - target: {fileID: 5312058186514047349, guid: f874c4678eecc2740b582d417e4a376e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.392
       objectReference: {fileID: 0}
     - target: {fileID: 5312058186514047349, guid: f874c4678eecc2740b582d417e4a376e,
         type: 3}
