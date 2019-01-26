@@ -17,7 +17,8 @@ public class ObjectsMover : MonoBehaviour
     [SerializeField]
     private Transform _objectsDestroyPoint, _enemy;
 
-
+    [SerializeField]
+    private AnimationCurve _drinkSpeedCurve;
 
     private const float SpeedUpdateDelay = 0.1f;
 
@@ -58,16 +59,10 @@ public class ObjectsMover : MonoBehaviour
         while (true)
         {
             drinkValue = _playerController.Drink;
-            speedModifier = (1 / _playerController.Drink * _drinkToSpeedTranslateMultiplier);
-            Debug.Log(speedModifier);
+            speedModifier = _drinkSpeedCurve.Evaluate(drinkValue);
 
-            if (speedModifier < _minSpeedModifier)
-                speedModifier = _minSpeedModifier;
-            else if (speedModifier > _maxSpeedModifier)
-                speedModifier = _maxSpeedModifier;
-
-            _objectsSpeed = _maxObjectsSpeed - speedModifier;
-            _enemySpeed = _maxEnemySpeed - speedModifier;
+            _objectsSpeed = _maxObjectsSpeed * speedModifier;
+            _enemySpeed = _maxEnemySpeed * (1 - speedModifier);
 
             yield return speedUpdateWait;            
         }
