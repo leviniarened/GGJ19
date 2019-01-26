@@ -10,7 +10,10 @@ public enum Direction
 public class GarbageContainer : MonoBehaviour
 {
     [SerializeField]
-    private List<GameObject> bonusPrefabs;
+    private Direction containerDirection;
+
+    [SerializeField]
+    private Transform spawnPosObject;
 
     [SerializeField]
     private Animator animatorController;
@@ -18,9 +21,11 @@ public class GarbageContainer : MonoBehaviour
     [SerializeField]
     private float rangeToKickSuccessfully = 1;
 
-    private Transform player;
+    private Player player;
 
     public static event Action OnKickFail;
+
+    LevelGenerator levelGenerator;
 
     //Init here
     private void OnEnable()
@@ -39,27 +44,31 @@ public class GarbageContainer : MonoBehaviour
     /// <summary>
     /// On press kick container
     /// </summary>
-    public void KickContainer()
+    public void KickContainer(Direction kickDirection)
     {
-        if (Vector3.Distance(player.position, transform.position) >= rangeToKickSuccessfully)
+        if (Vector3.Distance(player.transform.position, transform.position) >= rangeToKickSuccessfully)
         {
             //TODO player fail with kick handle event
+            player.PlayKickFail(kickDirection);
+
             OnKickFail?.Invoke();
             return;//can't kick object
         }
-        if(animatorController!=null)
-            animatorController.Play("Kick");
-        var randomBonusIndex = UnityEngine.Random.Range(0, bonusPrefabs.Count);
-        var bonus = Instantiate(bonusPrefabs[randomBonusIndex]);
 
-    }
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(kickDirection != containerDirection)
         {
-            KickContainer();
+            player.PlayKickFail(kickDirection);
+
+            OnKickFail?.Invoke();
+            return;
         }
+
+        if(animatorController!=null)
+            animatorController.Play("Drop");
+
+        var bottle = levelGenerator.GetBottle();
+        bottle.transform.position = spawnPosObject.transform.position;
+        bottle.GetComponent<Bonus>().Force();
     }
 
     private void OnDrawGizmosSelected()
@@ -70,6 +79,7 @@ public class GarbageContainer : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = FindObjectOfType<Player>();
+        levelGenerator = FindObjectOfType<LevelGenerator>();
     }
 }
