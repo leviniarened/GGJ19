@@ -41,7 +41,7 @@ public class ObjectsMover : MonoBehaviour
         for (int i = 0; i < _levelGenerator.ActiveMovingObjects.Count; i++)
         {
             Transform obj = _levelGenerator.ActiveMovingObjects[i].transform;
-            obj.Translate(_objectsSpeed * Time.deltaTime, 0, 0);
+            obj.Translate(_objectsSpeed * Time.deltaTime, 0, 0, Space.World);
             if (obj.position.x > _objectsDestroyPoint.position.x)
                 _levelGenerator.ReturnObjectToPool(obj.gameObject);
         }
