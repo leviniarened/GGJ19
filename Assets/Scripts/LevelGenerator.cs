@@ -22,9 +22,12 @@ public class LevelGenerator : MonoBehaviour
     public List<GameObject> ActiveMovingObjects { get => _activeMovingObjects;}
 
     [SerializeField]
-    private int _spawnDistance, _houseSpawnDelay, _trashcanSpawnDelay, _treeSpawnDelay,
+    private int _spawnDistance, _houseSpawnBaseDelay, _trashcanSpawnBaseDelay, _treeSpawnBaseDelay,
+        _houseSpawnDelayMax, _treeSpawnDelayMax, _trashcanSpawnDelayMax,
         _houseSpawnerPosition, _trashcanSpawnerPosition, _treeSpawnerPosition,
         _treeSpawnProbability, _trashcanSpawnProbability;
+
+    private int _houseSpawnDelay, _trashcanSpawnDelay, _treeSpawnDelay;
 
     private const int SpawnTimerDelay = 1;
     private WaitForSeconds _spawnTimerWait;
@@ -45,6 +48,10 @@ public class LevelGenerator : MonoBehaviour
         PopulatePool(_treesPool, _treePrefabs, _treesPoolSize);
 
         _spawnTimerWait = new WaitForSeconds(SpawnTimerDelay);
+
+        _houseSpawnDelay = _houseSpawnBaseDelay;
+        _trashcanSpawnDelay = _trashcanSpawnBaseDelay;
+        _treeSpawnDelay = _treeSpawnBaseDelay;
 
         StartCoroutine("SpawnCoroutine");
     }
@@ -85,21 +92,33 @@ public class LevelGenerator : MonoBehaviour
         obj.SetActive(false);
     }
 
+    public void SpawnBottle()
+    {
+
+    }
+
     private IEnumerator SpawnCoroutine()
     {
-        int spawnTimer = 0;
         while (true)
-        {
-            spawnTimer++;
-
-            if (spawnTimer % _houseSpawnDelay == 0)
+        {            
+            if (_houseSpawnDelay-- == 0)
+            {
                 SpawnObjectFromPool(_housesPool, _houseSpawnerPosition);
+                _houseSpawnDelay = ChangeSpawnDelay(_houseSpawnBaseDelay, _houseSpawnDelayMax);
+            }
 
-            if (spawnTimer % _treeSpawnDelay == 0 && Random.Range(0, 100) < _treeSpawnProbability)
+            if (_treeSpawnDelay-- == 0)
+            {
                 SpawnObjectFromPool(_treesPool, _treeSpawnerPosition);
-
-            if (spawnTimer % _trashcanSpawnDelay == 0 && Random.Range(0, 100) < _trashcanSpawnProbability)
+                _treeSpawnDelay = ChangeSpawnDelay(_treeSpawnBaseDelay, _treeSpawnDelayMax);
+            }
+            
+            if (_trashcanSpawnDelay-- == 0)
+            {
                 SpawnObjectFromPool(_trashCansPool, _trashcanSpawnerPosition);
+                _trashcanSpawnDelay = ChangeSpawnDelay(_trashcanSpawnBaseDelay, _trashcanSpawnDelayMax);
+            }
+
 
             yield return _spawnTimerWait;
         }
@@ -108,5 +127,10 @@ public class LevelGenerator : MonoBehaviour
     private void SpawnObjectFromPool(Queue<GameObject> pool, int ZPosition)
     {
         GetObjectFromPool(pool).transform.position = new Vector3(_spawnDistance, 0, -ZPosition + (2 * Random.Range(0, 2)) * ZPosition);
+    }
+
+    private int ChangeSpawnDelay(int baseSpawnDelay, int maxSpawnDelay)
+    {
+        return Random.Range(baseSpawnDelay, maxSpawnDelay + 1);
     }
 }
