@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private float _distToEnemyForVictory;
 
+    public delegate void GameOverEvent();
+    public static GameOverEvent GameOverVictory, GameOverLoss;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,12 +38,14 @@ public class GameManager : MonoBehaviour
     private void GameoverVictory()
     {
         Debug.Log("Враг пойман!!!! гамовер, виктори и т.п.");
+        GameOverVictory.Invoke();
     }
 
 
     private void GameoverLoss()
     {
         Debug.Log("Вам не хватило бухла, вы проиграли.");
+        GameOverLoss.Invoke();
     }
 
 

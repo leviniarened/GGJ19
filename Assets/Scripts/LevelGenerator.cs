@@ -82,7 +82,8 @@ public class LevelGenerator : MonoBehaviour
             GetObjectFromPool(_streetSegmentsPool).transform.position = new Vector3(_spawnPositionX + _distBetweenStreetSegmentsAtStart*i, 0, 0);
         
         _lastStreetSegment = GetObjectFromPool(_streetSegmentsPool).transform;
-        _lastTrashcan = _trashCansPool.Peek().transform;
+        _lastTrashcan = GetObjectFromPool(_trashCansPool).transform;
+        _lastTrashcan.transform.position = new Vector3(100, 0, 0);
     }
 
     private GameObject GetObjectFromPool(Queue<GameObject> pool)
