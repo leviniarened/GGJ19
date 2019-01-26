@@ -333,22 +333,21 @@ MonoBehaviour:
   - {fileID: 1847151097759900879, guid: b10da1396550c714bbe5e446fa295d6d, type: 3}
   _bottlePrefabs:
   - {fileID: 1528430225, guid: c568d62c97e083d4face5d381cdcc468, type: 3}
-  _housePoolSize: 10
+  _housePoolSize: 20
   _treesPoolSize: 20
   _trashCansPoolSize: 25
   _bottlesPoolSize: 12
-  _spawnDistance: -10
-  _houseSpawnBaseDelay: 5
-  _trashcanSpawnBaseDelay: 5
-  _treeSpawnBaseDelay: 3
-  _houseSpawnDelayMax: 8
-  _treeSpawnDelayMax: 5
-  _trashcanSpawnDelayMax: 7
-  _houseSpawnerPosition: 15
-  _trashcanSpawnerPosition: 2
+  _spawnPositionX: 10
+  _houseClosestSpawnDist: 4
+  _treeClosestSpawnDist: 3
+  _trashcanClosestSpawnDist: 7
+  _houseSpawnerZPosition: 10
+  _trashcanSpawnerZPosition: 2
   _treeSpawnerPosition: 3
   _treeSpawnProbability: 70
+  _houseSpawnProbability: 80
   _trashcanSpawnProbability: 50
+  _initialTrashcanSpawnTimer: 5
 --- !u!4 &899153269
 Transform:
   m_ObjectHideFlags: 0
@@ -376,11 +375,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f248cf70e5a87944d994b076b1ef7d5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObjectsSpeed: 4
-  EnemySpeed: 1
-  SpeedMultiplier: 1
-  _speedMultiplierDecreaseAmount: 0.04
-  _speedDecreaseDelay: 5
+  _maxObjectsSpeed: 4
+  _maxEnemySpeed: 1
+  _minObjectsSpeed: 0
+  _drinkToSpeedTranslateMultiplier: 2
   _objectsDestroyPoint: {fileID: 272207309}
   _enemy: {fileID: 1682652948}
 --- !u!1 &1292231434

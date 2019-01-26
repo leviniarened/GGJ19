@@ -22,12 +22,15 @@ public class LevelGenerator : MonoBehaviour
     public List<GameObject> ActiveMovingObjects { get => _activeMovingObjects;}
 
     [SerializeField]
-    private int _spawnDistance, _houseSpawnBaseDelay, _trashcanSpawnBaseDelay, _treeSpawnBaseDelay,
-        _houseSpawnDelayMax, _treeSpawnDelayMax, _trashcanSpawnDelayMax,
-        _houseSpawnerPosition, _trashcanSpawnerPosition, _treeSpawnerPosition,
-        _treeSpawnProbability, _trashcanSpawnProbability;
+    private int _spawnPositionX,
+        _houseClosestSpawnDist, _treeClosestSpawnDist, _trashcanClosestSpawnDist,
+        _houseSpawnerZPosition, _trashcanSpawnerZPosition, _treeSpawnerPosition,
+        _treeSpawnProbability, _houseSpawnProbability, _trashcanSpawnProbability;
 
-    private int _houseSpawnDelay, _trashcanSpawnDelay, _treeSpawnDelay;
+    private Transform _lastHouse, _lastTrashcan;
+
+    [SerializeField]
+    private int _initialTrashcanSpawnTimer;
 
     private const int SpawnTimerDelay = 1;
     private WaitForSeconds _spawnTimerWait;
@@ -49,11 +52,10 @@ public class LevelGenerator : MonoBehaviour
         PopulatePool(_treesPool, _treePrefabs, _treesPoolSize);
         PopulatePool(_bottlesPool, _bottlePrefabs, _bottlesPoolSize);
 
-        _spawnTimerWait = new WaitForSeconds(SpawnTimerDelay);
+        _lastHouse = GetObjectFromPool(_housesPool).transform;
+        _lastTrashcan = GetObjectFromPool(_trashCansPool).transform;
 
-        _houseSpawnDelay = _houseSpawnBaseDelay;
-        _trashcanSpawnDelay = _trashcanSpawnBaseDelay;
-        _treeSpawnDelay = _treeSpawnBaseDelay;
+        _spawnTimerWait = new WaitForSeconds(SpawnTimerDelay);
 
         StartCoroutine("SpawnCoroutine");
     }
@@ -105,34 +107,26 @@ public class LevelGenerator : MonoBehaviour
 
     private IEnumerator SpawnCoroutine()
     {
+
         while (true)
-        {            
-            if (_houseSpawnDelay-- == 0)
-            {
-                SpawnObjectFromPool(_housesPool, _houseSpawnerPosition);
-                _houseSpawnDelay = ChangeSpawnDelay(_houseSpawnBaseDelay, _houseSpawnDelayMax);
-            }
+        {
+            if (_lastHouse.position.x > _spawnPositionX + _houseClosestSpawnDist && Random.Range(0, 100) > _houseSpawnProbability)
+                _lastHouse = SpawnObjectFromPool(_housesPool, _houseSpawnerZPosition);
 
-            if (_treeSpawnDelay-- == 0)
-            {
-                SpawnObjectFromPool(_treesPool, _treeSpawnerPosition);
-                _treeSpawnDelay = ChangeSpawnDelay(_treeSpawnBaseDelay, _treeSpawnDelayMax);
-            }
-            
-            if (_trashcanSpawnDelay-- == 0)
-            {
-                SpawnObjectFromPool(_trashCansPool, _trashcanSpawnerPosition);
-                _trashcanSpawnDelay = ChangeSpawnDelay(_trashcanSpawnBaseDelay, _trashcanSpawnDelayMax);
-            }
-
+            if (_initialTrashcanSpawnTimer > 0)
+                _initialTrashcanSpawnTimer--;
+            else if (_lastTrashcan.position.x > _spawnPositionX + _trashcanClosestSpawnDist && Random.Range(0,100) > _trashcanSpawnProbability)
+                _lastTrashcan = SpawnObjectFromPool(_trashCansPool, _trashcanSpawnerZPosition);
 
             yield return _spawnTimerWait;
         }
     }
 
-    private void SpawnObjectFromPool(Queue<GameObject> pool, int ZPosition)
+    private Transform SpawnObjectFromPool(Queue<GameObject> pool, int ZPosition)
     {
-        GetObjectFromPool(pool).transform.position = new Vector3(_spawnDistance, 0, -ZPosition + (2 * Random.Range(0, 2)) * ZPosition);
+        Transform obj = GetObjectFromPool(pool).transform;
+        obj.position = new Vector3(_spawnPositionX, 0, -ZPosition + (2 * Random.Range(0, 2)) * ZPosition);
+        return obj;
     }
 
     private int ChangeSpawnDelay(int baseSpawnDelay, int maxSpawnDelay)

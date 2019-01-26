@@ -6,28 +6,32 @@ public class ObjectsMover : MonoBehaviour
 {
 
     private LevelGenerator _levelGenerator;
+    private Player _playerController;
 
-    public int ObjectsSpeed;
-    public int EnemySpeed;
-    public float SpeedMultiplier = 1;
     [SerializeField]
-    private float _speedMultiplierDecreaseAmount;
-    [SerializeField]
-    private int _speedDecreaseDelay;
-    WaitForSeconds _speedDecreaseWait;
+    private float _maxObjectsSpeed, _maxEnemySpeed, _minObjectsSpeed, _drinkToSpeedTranslateMultiplier;
+
+    private float _objectsSpeed, _enemySpeed;
+
 
     [SerializeField]
     private Transform _objectsDestroyPoint, _enemy;
 
-    private int _maxSpeedMultiplier;
+
+
+    private const float SpeedUpdateDelay = 0.1f;
+
 
 
     // Start is called before the first frame update
     void Start()
     {
         _levelGenerator = FindObjectOfType<LevelGenerator>();
-        _speedDecreaseWait = new WaitForSeconds(_speedDecreaseDelay);
-        _maxSpeedMultiplier = (int)SpeedMultiplier;
+        _playerController = FindObjectOfType<Player>();
+        StartCoroutine("SpeedUpdateCoroutine");
+
+        _objectsSpeed = _maxObjectsSpeed;
+        _enemySpeed = _maxEnemySpeed;
     }
 
     // Update is called once per frame
@@ -37,29 +41,28 @@ public class ObjectsMover : MonoBehaviour
         for (int i = 0; i < _levelGenerator.ActiveMovingObjects.Count; i++)
         {
             Transform obj = _levelGenerator.ActiveMovingObjects[i].transform;
-            obj.Translate(SpeedMultiplier * ObjectsSpeed * Time.deltaTime, 0, 0);
+            obj.Translate(_objectsSpeed * Time.deltaTime, 0, 0);
             if (obj.position.x > _objectsDestroyPoint.position.x)
                 _levelGenerator.ReturnObjectToPool(obj.gameObject);
         }
 
-        _enemy.transform.Translate(SpeedMultiplier * EnemySpeed * Time.deltaTime, 0, 0);
+        _enemy.transform.Translate(_enemySpeed * Time.deltaTime, 0, 0);
     }
 
-    private IEnumerator SpeedDecreaseCoroutine()
+    private IEnumerator SpeedUpdateCoroutine()
     {
-        while(true)
+        WaitForSeconds speedUpdateWait = new WaitForSeconds(SpeedUpdateDelay);
+
+        while (true)
         {
-            yield return _speedDecreaseWait;
-            SpeedMultiplier -= _speedMultiplierDecreaseAmount;
+            _objectsSpeed -= _playerController.Drink * _drinkToSpeedTranslateMultiplier;
+            _enemySpeed -= _playerController.Drink * _drinkToSpeedTranslateMultiplier;
+
+            
+
+
+            yield return speedUpdateWait;            
         }
     }
 
-    [ContextMenu("IncreaseSpeed")]
-    //ВРЕМЕННО, тест
-    public void IncreaseSpeed()
-    {
-        SpeedMultiplier += 0.2f;
-        if (SpeedMultiplier > _maxSpeedMultiplier)
-            SpeedMultiplier = _maxSpeedMultiplier;
-    }
 }
