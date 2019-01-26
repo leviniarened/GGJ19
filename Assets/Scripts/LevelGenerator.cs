@@ -7,14 +7,14 @@ using Random = UnityEngine.Random;
 public class LevelGenerator : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _trashCanPrefab, _housePrefab;
+    private GameObject _trashCanPrefab, _streetSegmentPrefab;
     [SerializeField]
     private GameObject[] _treePrefabs, _bottlePrefabs;
 
     [SerializeField]
-    private int _housePoolSize, _treesPoolSize, _trashCansPoolSize, _bottlesPoolSize;
+    private int _streetSegmentsPoolSize, _trashCansPoolSize, _bottlesPoolSize;
 
-    private Queue<GameObject> _trashCansPool, _housesPool, _treesPool, _bottlesPool;
+    private Queue<GameObject> _trashCansPool, _streetSegmentsPool, _bottlesPool;
 
 
 
@@ -23,17 +23,17 @@ public class LevelGenerator : MonoBehaviour
 
     [SerializeField]
     private int _spawnPositionX,
-        _houseClosestSpawnDist, _treeClosestSpawnDist, _trashcanClosestSpawnDist,
-        _houseSpawnerZPosition, _trashcanSpawnerZPosition, _treeSpawnerPosition,
-        _treeSpawnProbability, _houseSpawnProbability, _trashcanSpawnProbability;
+        _streetSegmentClosestSpawnDist, _trashcanClosestSpawnDist,
+        _trashcanSpawnerZPosition,
+        _streetSegmentSpawnProbability, _trashcanSpawnProbability;
 
-    private Transform _lastHouse, _lastTrashcan;
+    private Transform _lastStreetSegment, _lastTrashcan;
 
     [SerializeField]
     private int _initialTrashcanSpawnTimer;
 
     private const int SpawnTimerDelay = 1;
-    private WaitForSeconds _spawnTimerWait;
+    
 
 
 
@@ -41,21 +41,17 @@ public class LevelGenerator : MonoBehaviour
     void Start()
     {
         _trashCansPool = new Queue<GameObject>();
-        _housesPool = new Queue<GameObject>();
-        _treesPool = new Queue<GameObject>();
+        _streetSegmentsPool = new Queue<GameObject>();
         _bottlesPool = new Queue<GameObject>();
 
         _activeMovingObjects = new List<GameObject>();
 
         PopulatePool(_trashCansPool, _trashCanPrefab, _trashCansPoolSize);
-        PopulatePool(_housesPool, _housePrefab, _housePoolSize);
-        PopulatePool(_treesPool, _treePrefabs, _treesPoolSize);
+        PopulatePool(_streetSegmentsPool, _streetSegmentPrefab, _streetSegmentsPoolSize);
         PopulatePool(_bottlesPool, _bottlePrefabs, _bottlesPoolSize);
 
-        _lastHouse = GetObjectFromPool(_housesPool).transform;
+         _lastStreetSegment = GetObjectFromPool(_streetSegmentsPool).transform;
         _lastTrashcan = GetObjectFromPool(_trashCansPool).transform;
-
-        _spawnTimerWait = new WaitForSeconds(SpawnTimerDelay);
 
         StartCoroutine("SpawnCoroutine");
     }
@@ -107,11 +103,12 @@ public class LevelGenerator : MonoBehaviour
 
     private IEnumerator SpawnCoroutine()
     {
+        WaitForSeconds spawnTimerWait = new WaitForSeconds(SpawnTimerDelay);
 
         while (true)
         {
-            if (_lastHouse.position.x > _spawnPositionX + _houseClosestSpawnDist && Random.Range(0, 100) > _houseSpawnProbability)
-                _lastHouse = SpawnObjectFromPool(_housesPool, _houseSpawnerZPosition);
+            if (_lastStreetSegment.position.x > _spawnPositionX + _streetSegmentClosestSpawnDist && Random.Range(0, 100) > _streetSegmentSpawnProbability)
+                _lastStreetSegment = SpawnObjectFromPool(_streetSegmentsPool, 0);
 
             if (_initialTrashcanSpawnTimer > 0)
                 _initialTrashcanSpawnTimer--;
@@ -124,14 +121,14 @@ public class LevelGenerator : MonoBehaviour
                     _lastTrashcan.GetComponent<GarbageContainer>().Init(Direction.Left);
             }
 
-            yield return _spawnTimerWait;
+            yield return spawnTimerWait;
         }
     }
 
     private Transform SpawnObjectFromPool(Queue<GameObject> pool, int ZPosition)
     {
         Transform obj = GetObjectFromPool(pool).transform;
-        obj.position = new Vector3(_spawnPositionX, 0, -ZPosition + (2 * Random.Range(0, 2)) * ZPosition);
+        obj.position = new Vector3(_spawnPositionX, 0, -1 * ZPosition + (2 * Random.Range(0, 2)) * ZPosition);
         return obj;
     }
 

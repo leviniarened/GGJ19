@@ -9,7 +9,7 @@ public class ObjectsMover : MonoBehaviour
     private Player _playerController;
 
     [SerializeField]
-    private float _maxObjectsSpeed, _maxEnemySpeed, _minObjectsSpeed, _drinkToSpeedTranslateMultiplier;
+    private float _maxObjectsSpeed, _maxEnemySpeed, _minObjectsSpeed, _drinkToSpeedTranslateMultiplier, _maxSpeedModifier, _minSpeedModifier;
 
     private float _objectsSpeed, _enemySpeed;
 
@@ -52,14 +52,22 @@ public class ObjectsMover : MonoBehaviour
     private IEnumerator SpeedUpdateCoroutine()
     {
         WaitForSeconds speedUpdateWait = new WaitForSeconds(SpeedUpdateDelay);
+        float drinkValue = 0;
+        float speedModifier = 0;
 
         while (true)
         {
-            _objectsSpeed = _maxObjectsSpeed - _playerController.Drink * _drinkToSpeedTranslateMultiplier;
-            _enemySpeed = _maxEnemySpeed - _playerController.Drink * _drinkToSpeedTranslateMultiplier;
+            drinkValue = _playerController.Drink;
+            speedModifier = (1 / _playerController.Drink * _drinkToSpeedTranslateMultiplier);
+            Debug.Log(speedModifier);
 
-            
+            if (speedModifier < _minSpeedModifier)
+                speedModifier = _minSpeedModifier;
+            else if (speedModifier > _maxSpeedModifier)
+                speedModifier = _maxSpeedModifier;
 
+            _objectsSpeed = _maxObjectsSpeed - speedModifier;
+            _enemySpeed = _maxEnemySpeed - speedModifier;
 
             yield return speedUpdateWait;            
         }

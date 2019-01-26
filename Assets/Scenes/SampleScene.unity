@@ -328,6 +328,7 @@ GameObject:
   - component: {fileID: 899153269}
   - component: {fileID: 899153268}
   - component: {fileID: 899153270}
+  - component: {fileID: 899153271}
   m_Layer: 0
   m_Name: Level
   m_TagString: Untagged
@@ -349,7 +350,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _trashCanPrefab: {fileID: 5263773363780700227, guid: 919958a22c24dc94b819fc83858e3595,
     type: 3}
-  _housePrefab: {fileID: 4052813798650321507, guid: 9f0ff2da14056c849a0961ad87600078,
+  _streetSegmentPrefab: {fileID: 32924418542322733, guid: f80afea694201154f9fc77f95cfc0349,
     type: 3}
   _treePrefabs:
   - {fileID: 184547238625614548, guid: 6b96e0e703ba303469e91ffe429990e1, type: 3}
@@ -360,19 +361,14 @@ MonoBehaviour:
   - {fileID: 5930662465184447417, guid: df398b80fa22cea4cb9a5065add0092b, type: 3}
   - {fileID: 147488399, guid: 07b751414b32f7c4ea69d98fb00e0c34, type: 3}
   - {fileID: 1836369965, guid: 860b0f343ef49ef49983ae7ac0abcb2f, type: 3}
-  _housePoolSize: 20
-  _treesPoolSize: 20
+  _streetSegmentsPoolSize: 10
   _trashCansPoolSize: 25
   _bottlesPoolSize: 12
   _spawnPositionX: 10
-  _houseClosestSpawnDist: 4
-  _treeClosestSpawnDist: 3
+  _streetSegmentClosestSpawnDist: 10
   _trashcanClosestSpawnDist: 7
-  _houseSpawnerZPosition: 10
   _trashcanSpawnerZPosition: 1
-  _treeSpawnerPosition: 3
-  _treeSpawnProbability: 70
-  _houseSpawnProbability: 80
+  _streetSegmentSpawnProbability: 0
   _trashcanSpawnProbability: 50
   _initialTrashcanSpawnTimer: 5
 --- !u!4 &899153269
@@ -405,9 +401,23 @@ MonoBehaviour:
   _maxObjectsSpeed: 4
   _maxEnemySpeed: 1
   _minObjectsSpeed: 0
-  _drinkToSpeedTranslateMultiplier: 1
+  _drinkToSpeedTranslateMultiplier: 0.4
+  _maxSpeedModifier: 2
+  _minSpeedModifier: 0.3
   _objectsDestroyPoint: {fileID: 272207309}
   _enemy: {fileID: 1682652948}
+--- !u!114 &899153271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899153267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c923492c6d54ff84d87cd7ed26a450cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1292231434
 GameObject:
   m_ObjectHideFlags: 0
@@ -602,7 +612,7 @@ GameObject:
   - component: {fileID: 1682652948}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
