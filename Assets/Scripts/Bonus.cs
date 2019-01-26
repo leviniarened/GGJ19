@@ -39,6 +39,11 @@ public class Bonus : MonoBehaviour
         levelGenerator = FindObjectOfType<LevelGenerator>();
     }
 
+    public void InitBonusDirection(Direction dir)
+    {
+        bonusDirection = dir;
+    }
+
     private void OnEnable()
     {
         rb = GetComponent<Rigidbody>();
@@ -69,7 +74,7 @@ public class Bonus : MonoBehaviour
             return;
         }
 
-        player.PlayPickUpSuccess(thisBonusType, pickupDirection);
+        player.PlayPickUpSuccess(thisBonusType, bonusDirection);
         levelGenerator.ReturnObjectToPool(this.gameObject);
     }
 

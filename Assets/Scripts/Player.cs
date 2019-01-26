@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
 
     float drink = 0.5f;//ranged from 0 to 1
     [SerializeField]
-    float drinkDecreaseParam = 0.1f;
+    float drinkDecreaseParam = 0.01f;
     UIController ui;
 
 
@@ -41,6 +41,16 @@ public class Player : MonoBehaviour
         {
             rightHandAnimator.Play("Drink");
         }
+
+        if(bonus == BonusType.Alco)
+        {
+            Drink += 0.1f;
+        }
+        else if(bonus == BonusType.NotAlco)
+        {
+            Drink -= 0.1f;
+        }
+
         Debug.Log("Pickup success " + bonus.ToString() + " " + pickupDirection.ToString());
     }
 

@@ -66,9 +66,10 @@ public class GarbageContainer : MonoBehaviour
         if(animatorController!=null)
             animatorController.Play("Drop");
 
-        var bottle = levelGenerator.GetBottle();
+        var bottle = levelGenerator.GetBottle().GetComponent<Bonus>();
+        bottle.InitBonusDirection(containerDirection);
         bottle.transform.position = spawnPosObject.transform.position;
-        bottle.GetComponent<Bonus>().Force();
+        bottle.Force();
     }
 
     private void OnDrawGizmosSelected()

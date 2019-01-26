@@ -46,7 +46,7 @@ public class InputController : MonoBehaviour
 
     void GrabRightCall()
     {
-        GrabLeft?.Invoke();
+        GrabRight?.Invoke();
     }
 
     void Update()
