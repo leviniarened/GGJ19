@@ -10,7 +10,7 @@ public enum Direction
 public class GarbageContainer : MonoBehaviour
 {
     [SerializeField]
-    private List<GameObject> bonusPrefabs;
+    private Transform spawnPosObject;
 
     [SerializeField]
     private Animator animatorController;
@@ -21,6 +21,8 @@ public class GarbageContainer : MonoBehaviour
     private Transform player;
 
     public static event Action OnKickFail;
+
+    LevelGenerator levelGenerator;
 
     //Init here
     private void OnEnable()
@@ -48,9 +50,9 @@ public class GarbageContainer : MonoBehaviour
             return;//can't kick object
         }
         if(animatorController!=null)
-            animatorController.Play("Kick");
-        var randomBonusIndex = UnityEngine.Random.Range(0, bonusPrefabs.Count);
-        var bonus = Instantiate(bonusPrefabs[randomBonusIndex]);
+            animatorController.Play("Drop");
+        //levelGenerator.
+        //var bonus = Instantiate(bonusPrefabs[randomBonusIndex]);
 
     }
 
@@ -71,5 +73,6 @@ public class GarbageContainer : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        levelGenerator = FindObjectOfType<LevelGenerator>();
     }
 }
