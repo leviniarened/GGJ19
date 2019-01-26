@@ -115,8 +115,14 @@ public class LevelGenerator : MonoBehaviour
 
             if (_initialTrashcanSpawnTimer > 0)
                 _initialTrashcanSpawnTimer--;
-            else if (_lastTrashcan.position.x > _spawnPositionX + _trashcanClosestSpawnDist && Random.Range(0,100) > _trashcanSpawnProbability)
+            else if (_lastTrashcan.position.x > _spawnPositionX + _trashcanClosestSpawnDist && Random.Range(0, 100) > _trashcanSpawnProbability)
+            {
                 _lastTrashcan = SpawnObjectFromPool(_trashCansPool, _trashcanSpawnerZPosition);
+                if(_lastTrashcan.transform.position.z > 0)
+                    _lastTrashcan.GetComponent<GarbageContainer>().Init(Direction.Right);
+                else
+                    _lastTrashcan.GetComponent<GarbageContainer>().Init(Direction.Left);
+            }
 
             yield return _spawnTimerWait;
         }

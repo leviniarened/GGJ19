@@ -75,14 +75,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5276e070ec099c4b8fd9757ff79ce19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  containerDirection: 0
   spawnPosObject: {fileID: 5263773362876081094}
-  bonusPrefabs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   animatorController: {fileID: 5263773363955422436}
-  rangeToKickSuccessfully: 1
+  rangeToKickSuccessfully: 3
 --- !u!95 &5263773363955422436
 Animator:
   serializedVersion: 3

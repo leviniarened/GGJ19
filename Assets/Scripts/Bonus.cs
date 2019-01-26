@@ -34,10 +34,14 @@ public class Bonus : MonoBehaviour
     }
 
     private void Start()
-    {
-        rb = GetComponent<Rigidbody>();
+    {        
         player = FindObjectOfType<Player>();
         levelGenerator = FindObjectOfType<LevelGenerator>();
+    }
+
+    private void OnEnable()
+    {
+        rb = GetComponent<Rigidbody>();
     }
 
     public void PickUpBonus(Direction pickupDirection)

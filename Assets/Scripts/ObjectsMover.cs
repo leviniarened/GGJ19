@@ -55,8 +55,8 @@ public class ObjectsMover : MonoBehaviour
 
         while (true)
         {
-            _objectsSpeed -= _playerController.Drink * _drinkToSpeedTranslateMultiplier;
-            _enemySpeed -= _playerController.Drink * _drinkToSpeedTranslateMultiplier;
+            _objectsSpeed = _maxObjectsSpeed - _playerController.Drink * _drinkToSpeedTranslateMultiplier;
+            _enemySpeed = _maxEnemySpeed - _playerController.Drink * _drinkToSpeedTranslateMultiplier;
 
             
 
