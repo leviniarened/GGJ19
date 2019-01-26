@@ -331,15 +331,18 @@ MonoBehaviour:
   - {fileID: 184547238625614548, guid: 6b96e0e703ba303469e91ffe429990e1, type: 3}
   - {fileID: 8594284022897721837, guid: fc62343aeecdf8a4d971ea8ac8e60e86, type: 3}
   - {fileID: 1847151097759900879, guid: b10da1396550c714bbe5e446fa295d6d, type: 3}
-  _housePoolSize: 20
-  _treesPoolSize: 30
-  _trashCansPoolSize: 10
+  _housePoolSize: 30
+  _treesPoolSize: 50
+  _trashCansPoolSize: 40
+  _spawnDistance: -10
   _houseSpawnDelay: 5
   _trashcanSpawnDelay: 5
   _treeSpawnDelay: 5
   _houseSpawnerPosition: 15
   _trashcanSpawnerPosition: 2
   _treeSpawnerPosition: 3
+  _treeSpawnProbability: 70
+  _trashcanSpawnProbability: 50
 --- !u!4 &899153269
 Transform:
   m_ObjectHideFlags: 0

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using Random = UnityEngine.Random;
+
 public class LevelGenerator : MonoBehaviour
 {
     [SerializeField]
@@ -20,8 +22,9 @@ public class LevelGenerator : MonoBehaviour
     public List<GameObject> ActiveMovingObjects { get => _activeMovingObjects;}
 
     [SerializeField]
-    private int _houseSpawnDelay, _trashcanSpawnDelay, _treeSpawnDelay,
-        _houseSpawnerPosition, _trashcanSpawnerPosition, _treeSpawnerPosition;
+    private int _spawnDistance, _houseSpawnDelay, _trashcanSpawnDelay, _treeSpawnDelay,
+        _houseSpawnerPosition, _trashcanSpawnerPosition, _treeSpawnerPosition,
+        _treeSpawnProbability, _trashcanSpawnProbability;
 
     private const int SpawnTimerDelay = 1;
     private WaitForSeconds _spawnTimerWait;
@@ -58,7 +61,12 @@ public class LevelGenerator : MonoBehaviour
 
     private void PopulatePool(Queue<GameObject> pool, GameObject[] prefabs, int poolSize)
     {
-        PopulatePool(pool, prefabs[Random.Range(0, prefabs.Length)], poolSize);
+        for (int i = 0; i < poolSize; i++)
+        {
+            GameObject instance = Instantiate(prefabs[Random.Range(0, prefabs.Length)], Vector3.zero, Quaternion.identity, transform);
+            pool.Enqueue(instance);
+            instance.SetActive(false);
+        }
     }
 
     private GameObject GetObjectFromPool(Queue<GameObject> pool)
@@ -82,14 +90,22 @@ public class LevelGenerator : MonoBehaviour
         while (true)
         {
             spawnTimer++;
-            Debug.Log("корутина сделала один проход");
 
             if (spawnTimer % _houseSpawnDelay == 0)
-            {
-                GetObjectFromPool(_housesPool).transform.position = new Vector3(10,0, (-1 * Random.Range(0, 2)) * _houseSpawnerPosition);
-            }
+                SpawnObjectFromPool(_housesPool, _houseSpawnerPosition);
+
+            if (spawnTimer % _treeSpawnDelay == 0 && Random.Range(0, 100) < _treeSpawnProbability)
+                SpawnObjectFromPool(_treesPool, _treeSpawnerPosition);
+
+            if (spawnTimer % _trashcanSpawnDelay == 0 && Random.Range(0, 100) < _trashcanSpawnProbability)
+                SpawnObjectFromPool(_trashCansPool, _trashcanSpawnerPosition);
 
             yield return _spawnTimerWait;
         }
+    }
+
+    private void SpawnObjectFromPool(Queue<GameObject> pool, int ZPosition)
+    {
+        GetObjectFromPool(pool).transform.position = new Vector3(_spawnDistance, 0, (-1 * Random.Range(0, 2)) * ZPosition);
     }
 }
