@@ -2,17 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum BonusType
+{
+    Alco, NotAlco
+}
+
 public class Bonus : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private float pickupDistance;
+
+
+    public BonusType thisBonusType;
+    [SerializeField]
+    private Vector3 forceDirection;
+    private Rigidbody rb;
+
+    private void OnDrawGizmosSelected()
     {
-        
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, pickupDistance);
     }
 
-    // Update is called once per frame
-    void Update()
+
+
+    private void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
     }
+
+    [ContextMenu("Force")]
+    public void Force()
+    {
+        rb.AddForce(forceDirection, ForceMode.Impulse);
+    }
+
 }
