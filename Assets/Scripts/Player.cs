@@ -20,6 +20,12 @@ public class Player : MonoBehaviour
     float drinkDecreaseParam = 0.1f;
     UIController ui;
 
+
+    [SerializeField]
+    private Animator leftHandAnimator;
+    [SerializeField]
+    private Animator rightHandAnimator;
+
     public void PickUpDrink(float v)
     {
         Drink += v;
@@ -27,6 +33,14 @@ public class Player : MonoBehaviour
 
     public void PlayPickUpSuccess(BonusType bonus, Direction pickupDirection)
     {
+        if(pickupDirection == Direction.Left)
+        {
+            leftHandAnimator.Play("Drink");
+        }
+        if (pickupDirection == Direction.Right)
+        {
+            rightHandAnimator.Play("Drink");
+        }
         Debug.Log("Pickup success " + bonus.ToString() + " " + pickupDirection.ToString());
     }
 
