@@ -77,6 +77,11 @@ public class GarbageContainer : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, rangeToKickSuccessfully);
     }
 
+    public void Init(Direction dir)
+    {
+        containerDirection = dir;
+    }
+
     void Start()
     {
         player = FindObjectOfType<Player>();
