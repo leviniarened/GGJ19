@@ -102,6 +102,9 @@ public class Player : MonoBehaviour
 
     Transform GetClosest(IEnumerable<Transform> obj)
     {
+        if (obj == null)
+            return null;
+
         Transform tMin = null;
         float minDist = Mathf.Infinity;
         Vector3 currentPos = transform.position;
