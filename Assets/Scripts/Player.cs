@@ -27,23 +27,36 @@ public class Player : MonoBehaviour
     private Animator rightHandAnimator;
     [SerializeField]
     private Animator cameraAnimator;
+
+    [SerializeField]
+    private GameObject leftBottleHandle;
+    [SerializeField]
+    private GameObject rightBottleHandle;
+
     public void PickUpDrink(float v)
     {
         Drink += v;
     }
 
-    public void PlayPickUpSuccess(BonusType bonus, Direction pickupDirection)
+    public void PlayPickUpSuccess(BonusType bonus, Direction pickupDirection, GameObject bottle)
     {
         if(pickupDirection == Direction.Left)
         {
+            bottle.transform.parent = leftBottleHandle.transform;
             leftHandAnimator.Play("Drink");
         }
         if (pickupDirection == Direction.Right)
         {
+            bottle.transform.parent = rightBottleHandle.transform;
             rightHandAnimator.Play("Drink");
         }
 
-        if(bonus == BonusType.Alco)
+        bottle.transform.localPosition = Vector3.zero;
+        bottle.transform.rotation = Quaternion.identity;
+
+        Destroy(bottle, 2.5f);
+
+        if (bonus == BonusType.Alco)
         {
             Drink += 0.1f;
         }
