@@ -25,7 +25,8 @@ public class Player : MonoBehaviour
     private Animator leftHandAnimator;
     [SerializeField]
     private Animator rightHandAnimator;
-
+    [SerializeField]
+    private Animator cameraAnimator;
     public void PickUpDrink(float v)
     {
         Drink += v;
@@ -56,6 +57,7 @@ public class Player : MonoBehaviour
 
     public void PlayPickUpFail(Direction pickupDirection)
     {
+        cameraAnimator.Play("Reject");
         Debug.Log("Pickup fail " + pickupDirection.ToString());
     }
 
@@ -66,6 +68,7 @@ public class Player : MonoBehaviour
 
     public void PlayKickFail(Direction kickDirection)
     {
+        cameraAnimator.Play("Reject");
         Debug.Log("Kick fail " + kickDirection.ToString());
     }
 

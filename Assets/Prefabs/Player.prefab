@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3394943658455476006}
   - component: {fileID: 1519210411019275677}
   - component: {fileID: 1307023898669605690}
+  - component: {fileID: 1214876956632527620}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -82,6 +83,25 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2014390292256544902}
   m_Enabled: 1
+--- !u!95 &1214876956632527620
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2014390292256544902}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 92301b3d1cb9498448b850191d996fda, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5312058186514047351
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,6 +151,7 @@ MonoBehaviour:
   drinkDecreaseParam: 0.05
   leftHandAnimator: {fileID: 6843103290394916429}
   rightHandAnimator: {fileID: 3845493044561134024}
+  cameraAnimator: {fileID: 1214876956632527620}
 --- !u!1001 &3845493044570600616
 PrefabInstance:
   m_ObjectHideFlags: 0
