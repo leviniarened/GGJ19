@@ -9,7 +9,7 @@ public class ObjectsMover : MonoBehaviour
     private Player _playerController;
 
     [SerializeField]
-    private float _maxObjectsSpeed, _maxEnemySpeed, _minObjectsSpeed, _drinkToSpeedTranslateMultiplier, _maxSpeedModifier, _minSpeedModifier;
+    private float _baseObjectsSpeed, _baseEnemySpeed;
 
     private float _objectsSpeed, _enemySpeed;
 
@@ -20,7 +20,11 @@ public class ObjectsMover : MonoBehaviour
     [SerializeField]
     private AnimationCurve _drinkSpeedCurve;
 
+    [SerializeField]
+    private float _enemySpeedModifier;
+
     private const float SpeedUpdateDelay = 0.1f;
+
 
 
 
@@ -31,8 +35,8 @@ public class ObjectsMover : MonoBehaviour
         _playerController = FindObjectOfType<Player>();
         StartCoroutine("SpeedUpdateCoroutine");
 
-        _objectsSpeed = _maxObjectsSpeed;
-        _enemySpeed = _maxEnemySpeed;
+        _objectsSpeed = _baseObjectsSpeed;
+        _enemySpeed = _baseEnemySpeed;
     }
 
     // Update is called once per frame
@@ -61,10 +65,10 @@ public class ObjectsMover : MonoBehaviour
             drinkValue = _playerController.Drink;
             speedModifier = _drinkSpeedCurve.Evaluate(drinkValue);
 
-            _objectsSpeed = _maxObjectsSpeed * speedModifier;
-            _enemySpeed = _maxEnemySpeed * (1 - speedModifier);
+            _objectsSpeed = _baseObjectsSpeed * speedModifier;
+            _enemySpeed = _baseEnemySpeed * (speedModifier - _enemySpeedModifier);
 
-            yield return speedUpdateWait;            
+            yield return speedUpdateWait;
         }
     }
 
