@@ -53,4 +53,13 @@ public class ObjectsMover : MonoBehaviour
             SpeedMultiplier -= _speedMultiplierDecreaseAmount;
         }
     }
+
+    [ContextMenu("IncreaseSpeed")]
+    //ВРЕМЕННО, тест
+    public void IncreaseSpeed()
+    {
+        SpeedMultiplier += 0.2f;
+        if (SpeedMultiplier > _maxSpeedMultiplier)
+            SpeedMultiplier = _maxSpeedMultiplier;
+    }
 }

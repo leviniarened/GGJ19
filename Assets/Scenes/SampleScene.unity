@@ -331,13 +331,19 @@ MonoBehaviour:
   - {fileID: 184547238625614548, guid: 6b96e0e703ba303469e91ffe429990e1, type: 3}
   - {fileID: 8594284022897721837, guid: fc62343aeecdf8a4d971ea8ac8e60e86, type: 3}
   - {fileID: 1847151097759900879, guid: b10da1396550c714bbe5e446fa295d6d, type: 3}
-  _housePoolSize: 30
-  _treesPoolSize: 50
-  _trashCansPoolSize: 40
+  _bottlePrefabs:
+  - {fileID: 1528430225, guid: c568d62c97e083d4face5d381cdcc468, type: 3}
+  _housePoolSize: 10
+  _treesPoolSize: 20
+  _trashCansPoolSize: 25
+  _bottlesPoolSize: 12
   _spawnDistance: -10
-  _houseSpawnDelay: 5
-  _trashcanSpawnDelay: 5
-  _treeSpawnDelay: 5
+  _houseSpawnBaseDelay: 5
+  _trashcanSpawnBaseDelay: 5
+  _treeSpawnBaseDelay: 3
+  _houseSpawnDelayMax: 8
+  _treeSpawnDelayMax: 5
+  _trashcanSpawnDelayMax: 7
   _houseSpawnerPosition: 15
   _trashcanSpawnerPosition: 2
   _treeSpawnerPosition: 3
@@ -373,6 +379,8 @@ MonoBehaviour:
   ObjectsSpeed: 4
   EnemySpeed: 1
   SpeedMultiplier: 1
+  _speedMultiplierDecreaseAmount: 0.04
+  _speedDecreaseDelay: 5
   _objectsDestroyPoint: {fileID: 272207309}
   _enemy: {fileID: 1682652948}
 --- !u!1 &1292231434
@@ -706,7 +714,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2023880538}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 55, y: 0, z: 0}
+  m_LocalPosition: {x: 53.1, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 534669905}
