@@ -125,7 +125,7 @@ MonoBehaviour:
   bonusDirection: 0
   pickupDistance: 3
   thisBonusType: 0
-  forceDirection: {x: -10, y: 5, z: 0}
+  forceDirection: {x: -5, y: 2.5, z: 0}
 --- !u!1001 &554171145
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -133,6 +133,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1528430224}
     m_Modifications:
+    - target: {fileID: 100000, guid: e054a1358873c3746a2dcfe7e27643f9, type: 3}
+      propertyPath: m_Name
+      value: AlcoholOffset
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e054a1358873c3746a2dcfe7e27643f9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -188,10 +192,6 @@ PrefabInstance:
     - target: {fileID: 400000, guid: e054a1358873c3746a2dcfe7e27643f9, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: e054a1358873c3746a2dcfe7e27643f9, type: 3}
-      propertyPath: m_Name
-      value: AlcoholOffset
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: e054a1358873c3746a2dcfe7e27643f9, type: 3}
       propertyPath: m_Materials.Array.data[0]

@@ -73,8 +73,11 @@ public class Bonus : MonoBehaviour
             OnPickUpFail?.Invoke();
             return;
         }
-
-        player.PlayPickUpSuccess(thisBonusType, bonusDirection);
+        var bonusCopy = Instantiate(this.gameObject);
+        Destroy(bonusCopy.GetComponent<Bonus>());
+        Destroy(bonusCopy.GetComponent<Rigidbody>());
+        
+        player.PlayPickUpSuccess(thisBonusType, bonusDirection, bonusCopy);
         levelGenerator.ReturnObjectToPool(this.gameObject);
     }
 
