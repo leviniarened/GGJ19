@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
         StartCoroutine("GameoverCheck");
 
         GameOverVictory += Victory;
+        GameOverLossDrinkZero += Loss;
+        GameOverLossDrinkTooMuch += Loss;
     }
 
     private IEnumerator GameoverCheck()
@@ -38,7 +40,7 @@ public class GameManager : MonoBehaviour
                 GameOverLossDrinkZero?.Invoke();
 
             else if (_player.Drink == 1)
-                    GameOverLossDrinkTooMuch?.Invoke();
+                GameOverLossDrinkTooMuch?.Invoke();
 
             yield return wait;
         }
@@ -47,6 +49,11 @@ public class GameManager : MonoBehaviour
     private void Victory()
     {
         SceneManager.LoadScene(2);
+    }
+
+    private void Loss()
+    {
+        SceneManager.LoadScene(3);
     }
     
 }
