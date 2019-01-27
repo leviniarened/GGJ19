@@ -42,19 +42,19 @@ public class Player : MonoBehaviour
     {
         if(pickupDirection == Direction.Left)
         {
-            bottle.transform.parent = leftBottleHandle.transform;
+            bottle.transform.SetParent(leftBottleHandle.transform);
             leftHandAnimator.Play("Drink");
         }
         if (pickupDirection == Direction.Right)
         {
-            bottle.transform.parent = rightBottleHandle.transform;
+            bottle.transform.SetParent(rightBottleHandle.transform);
             rightHandAnimator.Play("Drink");
         }
 
         bottle.transform.localPosition = Vector3.zero;
-        bottle.transform.rotation = Quaternion.identity;
+        bottle.transform.localRotation = Quaternion.identity;
 
-        Destroy(bottle, 2.5f);
+        Destroy(bottle, 2.5f/2f);
 
         if (bonus == BonusType.Alco)
         {
