@@ -205,7 +205,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 272207308}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 69.8, y: 0, z: 0}
+  m_LocalPosition: {x: 90, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 899153269}
@@ -313,7 +313,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _trashCanPrefab: {fileID: 5263773363780700227, guid: 919958a22c24dc94b819fc83858e3595,
     type: 3}
-  _streetSegmentPrefab: {fileID: 32924418542322733, guid: f80afea694201154f9fc77f95cfc0349,
+  _streetSegmentPrefab: {fileID: 6285740771930252927, guid: ba31dcde88f5cdf40b07615508ce8917,
     type: 3}
   _treePrefabs:
   - {fileID: 184547238625614548, guid: 6b96e0e703ba303469e91ffe429990e1, type: 3}
@@ -324,18 +324,18 @@ MonoBehaviour:
   - {fileID: 5930662465184447417, guid: df398b80fa22cea4cb9a5065add0092b, type: 3}
   - {fileID: 147488399, guid: 07b751414b32f7c4ea69d98fb00e0c34, type: 3}
   - {fileID: 1836369965, guid: 860b0f343ef49ef49983ae7ac0abcb2f, type: 3}
-  _streetSegmentsPoolSize: 10
-  _trashCansPoolSize: 25
-  _bottlesPoolSize: 12
-  _amountOfStreetSegmentsAtStart: 4
-  _distBetweenStreetSegmentsAtStart: 15
-  _spawnPositionX: 10
-  _streetSegmentClosestSpawnDist: 10
+  _streetSegmentsPoolSize: 5
+  _trashCansPoolSize: 35
+  _bottlesPoolSize: 20
+  _amountOfStreetSegmentsAtStart: 2
+  _distBetweenStreetSegmentsAtStart: 90
+  _spawnPositionX: -30
+  _streetSegmentSpawnTriggerX: 30
   _trashcanClosestSpawnDist: 4
   _trashcanSpawnerZPosition: 1
   _streetSegmentSpawnProbability: 100
   _trashcanSpawnProbability: 70
-  _initialTrashcanSpawnTimer: 2
+  _initialTrashcanSpawnTimer: 0
 --- !u!4 &899153269
 Transform:
   m_ObjectHideFlags: 0
@@ -445,7 +445,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 10, y: 1, z: 10}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -0.4, z: 0}
 --- !u!23 &1292231436
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -463,7 +463,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9c4b6e706e166b340a4e38f55c3e0b50, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
