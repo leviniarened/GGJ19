@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     private float _distToEnemyForVictory;
 
     public delegate void GameOverEvent();
-    public static GameOverEvent GameOverVictory, GameOverLoss;
+    public static GameOverEvent GameOverVictory, GameOverLossDrinkZero, GameOverLossDrinkTooMuch;
 
     // Start is called before the first frame update
     void Start()
@@ -27,25 +27,25 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             if (Mathf.Abs(_player.transform.position.x - _enemy.position.x) < _distToEnemyForVictory)
-                GameoverVictory();
-            else if (_player.Drink == 0)
-                GameoverLoss();           
+            {
+                if (GameOverVictory != null)
+                    GameOverVictory.Invoke();
+            }
+
+            else if (_player.Drink == 0 )
+            {
+                if (GameOverLossDrinkZero != null)
+                    GameOverLossDrinkZero.Invoke();
+            }
+
+            else if (_player.Drink == 1)
+            {
+                if (GameOverLossDrinkTooMuch != null)
+                    GameOverLossDrinkTooMuch.Invoke();
+            }
 
             yield return wait;
         }
     }
-
-    private void GameoverVictory()
-    {
-        Debug.Log("Враг пойман!!!! гамовер, виктори и т.п.");
-        GameOverVictory.Invoke();
-    }
-
-
-    private void GameoverLoss()
-    {
-        Debug.Log("Вам не хватило бухла, вы проиграли.");
-        GameOverLoss.Invoke();
-    }
-
+    
 }
