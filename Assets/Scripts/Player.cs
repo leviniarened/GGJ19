@@ -70,7 +70,8 @@ public class Player : MonoBehaviour
 
     public void PlayPickUpFail(Direction pickupDirection)
     {
-        cameraAnimator.Play("Reject");
+        cameraAnimator.playbackTime = 0f;
+        cameraAnimator.Play("Reject", -1, 0);
         Debug.Log("Pickup fail " + pickupDirection.ToString());
     }
 
@@ -81,7 +82,8 @@ public class Player : MonoBehaviour
 
     public void PlayKickFail(Direction kickDirection)
     {
-        cameraAnimator.Play("Reject");
+        //cameraAnimator.playbackTime = 0f;
+        cameraAnimator.Play("Reject", -1, 0);
         Debug.Log("Kick fail " + kickDirection.ToString());
     }
 
@@ -131,12 +133,16 @@ public class Player : MonoBehaviour
     GarbageContainer GetNearestContainer()
     {
         var garbageC = FindObjectsOfType<GarbageContainer>().Select(t => t.transform);
+        var closest = GetClosest(garbageC);
+        if (closest == null) return null;
         return GetClosest(garbageC).gameObject.GetComponent<GarbageContainer>();
     }
 
     Bonus GetNearestBonus()
     {
         var garbageC = FindObjectsOfType<Bonus>().Select(t => t.transform);
+        var closest = GetClosest(garbageC);
+        if (closest == null) return null;
         return GetClosest(garbageC).gameObject.GetComponent<Bonus>();
     }
 
