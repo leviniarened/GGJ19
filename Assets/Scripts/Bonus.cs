@@ -79,6 +79,7 @@ public class Bonus : MonoBehaviour
         
         player.PlayPickUpSuccess(thisBonusType, bonusDirection, bonusCopy);
         levelGenerator.ReturnObjectToPool(this.gameObject);
+        OnPickUpSuccess?.Invoke();
     }
 
 

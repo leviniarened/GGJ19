@@ -24,6 +24,7 @@ public class GarbageContainer : MonoBehaviour
     private Player player;
 
     public static event Action OnKickFail;
+    public static event Action OnKickSuccess;
 
     LevelGenerator levelGenerator;
 
@@ -69,6 +70,7 @@ public class GarbageContainer : MonoBehaviour
         if(used)
         {
             player.PlayKickFail(kickDirection);
+            OnKickFail?.Invoke();
             return;
         }
 
@@ -80,6 +82,7 @@ public class GarbageContainer : MonoBehaviour
         bottle.transform.position = spawnPosObject.transform.position;
         bottle.Force();
         used = true;
+        OnKickSuccess?.Invoke();
     }
 
     private void OnDrawGizmosSelected()
