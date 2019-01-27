@@ -65,8 +65,11 @@ public class ObjectsMover : MonoBehaviour
             drinkValue = _playerController.Drink;
             speedModifier = _drinkSpeedCurve.Evaluate(drinkValue);
 
-            _objectsSpeed = _baseObjectsSpeed * speedModifier;
-            _enemySpeed = _baseEnemySpeed * (speedModifier - _enemySpeedModifier);
+            //_objectsspeed = _baseobjectsspeed * speedmodifier;
+            //_enemyspeed = _baseenemyspeed * (speedmodifier - _enemyspeedmodifier);
+
+            _objectsSpeed = _baseObjectsSpeed + speedModifier;
+            _enemySpeed = _baseEnemySpeed + speedModifier;
 
             yield return speedUpdateWait;
         }
