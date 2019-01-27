@@ -48,7 +48,4 @@ public class GameManager : MonoBehaviour
         GameOverLoss.Invoke();
     }
 
-
-
-
 }
