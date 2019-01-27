@@ -9,6 +9,12 @@ public class MainGameAudioController : SoundController
     {
         GetSource("Music").Play("MainTheme");
         GetSource("Ambience").Play("City");
+        Bonus.OnPickUpFail += MissTounts;
+        Bonus.OnPickUpSuccess += NiceTounts;
+        GarbageContainer.OnKickFail += MissTounts;
+        GarbageContainer.OnKickSuccess += TrashHit;
+        GarbageContainer.OnKickSuccess += HitTounts;
+        //Invoke("MyHomeTounts", 2f);
     }
     public void DrinkTount()
     {
