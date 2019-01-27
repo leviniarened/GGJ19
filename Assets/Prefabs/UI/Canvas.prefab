@@ -78,7 +78,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Right Kick
+  m_Text: 'Right Kick
+
+    (D)'
 --- !u!1 &107273626532073177
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,7 +307,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Right Grab
+  m_Text: 'Right Grab
+
+    (E)'
 --- !u!1 &107273627208766597
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,7 +388,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Left Kick
+  m_Text: 'Left Kick
+
+    (A)'
 --- !u!1 &107273627210757912
 GameObject:
   m_ObjectHideFlags: 0
@@ -1349,4 +1355,6 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Left Grab
+  m_Text: 'Left Grab
+
+    (Q)'
