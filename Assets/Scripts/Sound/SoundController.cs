@@ -7,7 +7,7 @@ namespace Game.Audio
     /// Верхний уровень контроля звука. С помощью него можно обратиться ко всем источникам звука через поле Name.
     /// Например на игроке могут присутствовать шаги, дыхание, реакции и тд. С помощью этого компонента можно гибко управлять ими.
     /// </summary>
-    class SoundController:MonoBehaviour
+    public class SoundController:MonoBehaviour
     {
         /// <summary>
         /// Список источников звука
