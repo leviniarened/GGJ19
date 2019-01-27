@@ -27,25 +27,20 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             if (Mathf.Abs(_player.transform.position.x - _enemy.position.x) < _distToEnemyForVictory)
-                GameoverVictory();
+            {
+                if (GameOverVictory != null)
+                    GameOverVictory.Invoke();
+            }
+
             else if (_player.Drink == 0)
-                GameoverLoss();           
+            {
+                if (GameOverLoss != null)
+                    GameOverLoss.Invoke();
+            }
+
 
             yield return wait;
         }
     }
-
-    private void GameoverVictory()
-    {
-        Debug.Log("Враг пойман!!!! гамовер, виктори и т.п.");
-        GameOverVictory.Invoke();
-    }
-
-
-    private void GameoverLoss()
-    {
-        Debug.Log("Вам не хватило бухла, вы проиграли.");
-        GameOverLoss.Invoke();
-    }
-
+    
 }

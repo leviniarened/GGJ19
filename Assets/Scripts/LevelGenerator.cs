@@ -117,12 +117,12 @@ public class LevelGenerator : MonoBehaviour
 
         while (true)
         {
-            if (_lastStreetSegment.position.x > _spawnPositionX + _streetSegmentClosestSpawnDist && Random.Range(0, 100) > _streetSegmentSpawnProbability)
+            if (_lastStreetSegment.position.x > _spawnPositionX + _streetSegmentClosestSpawnDist && Random.Range(0, 100) < _streetSegmentSpawnProbability)
                 _lastStreetSegment = SpawnObjectFromPool(_streetSegmentsPool, 0);
 
             if (_initialTrashcanSpawnTimer > 0)
                 _initialTrashcanSpawnTimer--;
-            else if (_lastTrashcan.position.x > _spawnPositionX + _trashcanClosestSpawnDist && Random.Range(0, 100) > _trashcanSpawnProbability)
+            else if (_lastTrashcan.position.x > _spawnPositionX + _trashcanClosestSpawnDist && Random.Range(0, 100) < _trashcanSpawnProbability)
             {
                 _lastTrashcan = SpawnObjectFromPool(_trashCansPool, _trashcanSpawnerZPosition);
                 if(_lastTrashcan.transform.position.z > 0)
