@@ -70,7 +70,6 @@ public class Player : MonoBehaviour
 
     public void PlayPickUpFail(Direction pickupDirection)
     {
-        cameraAnimator.playbackTime = 0f;
         cameraAnimator.Play("Reject", -1, 0);
         Debug.Log("Pickup fail " + pickupDirection.ToString());
     }
@@ -82,7 +81,6 @@ public class Player : MonoBehaviour
 
     public void PlayKickFail(Direction kickDirection)
     {
-        //cameraAnimator.playbackTime = 0f;
         cameraAnimator.Play("Reject", -1, 0);
         Debug.Log("Kick fail " + kickDirection.ToString());
     }
