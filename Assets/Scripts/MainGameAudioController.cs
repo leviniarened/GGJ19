@@ -10,12 +10,25 @@ public class MainGameAudioController : SoundController
         GetSource("Music").Play("MainTheme");
         GetSource("Ambience").Play("City");
         Bonus.OnPickUpFail += MissTounts;
-        Bonus.OnPickUpSuccess += NiceTounts;
+        Bonus.OnPickUpSuccess += PickupTount;
         GarbageContainer.OnKickFail += MissTounts;
         GarbageContainer.OnKickSuccess += TrashHit;
         GarbageContainer.OnKickSuccess += HitTounts;
-        //Invoke("MyHomeTounts", 2f);
+        Invoke("MyHomeTounts", 2f);
     }
+
+    public void PickupTount(bool success)
+    {
+        if(success)
+        {
+            DrinkTount();
+        }
+        else
+        {
+            NiceTounts();
+        }
+    }
+
     public void DrinkTount()
     {
         GetSource("DrinkTounts").PlayRandomSound();
@@ -51,7 +64,7 @@ public class MainGameAudioController : SoundController
 
     public void MyHomeTounts()
     {
-        GetSource("MyHomeTounts").PlayRandomSound();
+        GetSource("MyHomeTount").PlayRandomSound();
     }
 
     public void NiceTounts()

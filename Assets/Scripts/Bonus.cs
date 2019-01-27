@@ -23,7 +23,7 @@ public class Bonus : MonoBehaviour
     private Player player;
 
     public static event Action OnPickUpFail;
-    public static event Action OnPickUpSuccess;
+    public static event Action<bool> OnPickUpSuccess;
 
     LevelGenerator levelGenerator;
 
@@ -79,7 +79,8 @@ public class Bonus : MonoBehaviour
         
         player.PlayPickUpSuccess(thisBonusType, bonusDirection, bonusCopy);
         levelGenerator.ReturnObjectToPool(this.gameObject);
-        OnPickUpSuccess?.Invoke();
+        
+        OnPickUpSuccess?.Invoke(thisBonusType == BonusType.Alco);
     }
 
 
