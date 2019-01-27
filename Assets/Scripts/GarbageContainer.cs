@@ -27,11 +27,14 @@ public class GarbageContainer : MonoBehaviour
 
     LevelGenerator levelGenerator;
 
+    bool used = false;
+
     //Init here
     private void OnEnable()
     {
         if (animatorController != null)
             animatorController.Play("Idle");
+        used = false;
     }
 
     private void OnDisable()
@@ -63,6 +66,12 @@ public class GarbageContainer : MonoBehaviour
             return;
         }
 
+        if(used)
+        {
+            player.PlayKickFail(kickDirection);
+            return;
+        }
+
         if(animatorController!=null)
             animatorController.Play("Drop");
 
@@ -70,6 +79,7 @@ public class GarbageContainer : MonoBehaviour
         bottle.InitBonusDirection(containerDirection);
         bottle.transform.position = spawnPosObject.transform.position;
         bottle.Force();
+        used = true;
     }
 
     private void OnDrawGizmosSelected()

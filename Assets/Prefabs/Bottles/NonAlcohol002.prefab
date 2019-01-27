@@ -125,7 +125,7 @@ MonoBehaviour:
   bonusDirection: 0
   pickupDistance: 3
   thisBonusType: 1
-  forceDirection: {x: -10, y: 5, z: 0}
+  forceDirection: {x: -5, y: 2.5, z: 0}
 --- !u!1001 &1259066699
 PrefabInstance:
   m_ObjectHideFlags: 0
