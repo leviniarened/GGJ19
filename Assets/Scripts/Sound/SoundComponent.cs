@@ -11,7 +11,7 @@ namespace Game.Audio
     /// Управление полем Clip в компоненте AudioSource происходит отсюда.
     /// </summary>
     [RequireComponent(typeof(AudioSource))]
-    class SoundComponent : MonoBehaviour
+    public class SoundComponent : MonoBehaviour
     {
         /// <summary>
         /// Имя источника звука
