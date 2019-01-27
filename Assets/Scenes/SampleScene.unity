@@ -280,6 +280,75 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 320674522}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &855499693
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 373857831638994685, guid: ba5e27d1ba96051408552f2096920bd5,
+        type: 3}
+      propertyPath: m_Name
+      value: Audio
+      objectReference: {fileID: 0}
+    - target: {fileID: 373857831638994563, guid: ba5e27d1ba96051408552f2096920bd5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 414.36972
+      objectReference: {fileID: 0}
+    - target: {fileID: 373857831638994563, guid: ba5e27d1ba96051408552f2096920bd5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 186.16331
+      objectReference: {fileID: 0}
+    - target: {fileID: 373857831638994563, guid: ba5e27d1ba96051408552f2096920bd5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.25207072
+      objectReference: {fileID: 0}
+    - target: {fileID: 373857831638994563, guid: ba5e27d1ba96051408552f2096920bd5,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 373857831638994563, guid: ba5e27d1ba96051408552f2096920bd5,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 373857831638994563, guid: ba5e27d1ba96051408552f2096920bd5,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 373857831638994563, guid: ba5e27d1ba96051408552f2096920bd5,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 373857831638994563, guid: ba5e27d1ba96051408552f2096920bd5,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 373857831638994563, guid: ba5e27d1ba96051408552f2096920bd5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 373857831638994563, guid: ba5e27d1ba96051408552f2096920bd5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 373857831638994563, guid: ba5e27d1ba96051408552f2096920bd5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ba5e27d1ba96051408552f2096920bd5, type: 3}
 --- !u!1 &899153267
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,7 +399,7 @@ MonoBehaviour:
   _amountOfStreetSegmentsAtStart: 2
   _distBetweenStreetSegmentsAtStart: 90
   _spawnPositionX: -30
-  _streetSegmentSpawnTriggerX: 30
+  _streetSegmentSpawnTriggerX: 27
   _trashcanClosestSpawnDist: 4
   _trashcanSpawnerZPosition: 1
   _streetSegmentSpawnProbability: 100
@@ -413,7 +482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c923492c6d54ff84d87cd7ed26a450cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _distToEnemyForVictory: 0.5
+  _distToEnemyForVictory: -1.5
 --- !u!1 &1292231434
 GameObject:
   m_ObjectHideFlags: 0
