@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
         WaitForSeconds wait = new WaitForSeconds(GameoverConditionCheckDelay);
         while (true)
         {
-            Debug.Log(_player.transform.position.x - _enemy.position.x);
+
             if (_player.transform.position.x - _enemy.position.x < _distToEnemyForVictory)
                 GameOverVictory?.Invoke();
 

@@ -24,7 +24,7 @@ public class LevelGenerator : MonoBehaviour
 
     [SerializeField]
     private int _spawnPositionX,
-        _streetSegmentClosestSpawnDist, _trashcanClosestSpawnDist,
+        _streetSegmentSpawnTriggerX, _trashcanClosestSpawnDist,
         _trashcanSpawnerZPosition,
         _streetSegmentSpawnProbability, _trashcanSpawnProbability;
 
@@ -117,7 +117,9 @@ public class LevelGenerator : MonoBehaviour
 
         while (true)
         {
-            if (_lastStreetSegment.position.x > _spawnPositionX + _streetSegmentClosestSpawnDist && Random.Range(0, 100) < _streetSegmentSpawnProbability)
+            Debug.Log(_lastStreetSegment.position.x);
+
+            if (_lastStreetSegment.position.x > _streetSegmentSpawnTriggerX && Random.Range(0, 100) < _streetSegmentSpawnProbability)
                 _lastStreetSegment = SpawnObjectFromPool(_streetSegmentsPool, 0);
 
             if (_initialTrashcanSpawnTimer > 0)
