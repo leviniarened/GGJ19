@@ -27,22 +27,13 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             if (Mathf.Abs(_player.transform.position.x - _enemy.position.x) < _distToEnemyForVictory)
-            {
-                if (GameOverVictory != null)
-                    GameOverVictory.Invoke();
-            }
+                GameOverVictory?.Invoke();
 
             else if (_player.Drink == 0 )
-            {
-                if (GameOverLossDrinkZero != null)
-                    GameOverLossDrinkZero.Invoke();
-            }
+                GameOverLossDrinkZero?.Invoke();
 
             else if (_player.Drink == 1)
-            {
-                if (GameOverLossDrinkTooMuch != null)
-                    GameOverLossDrinkTooMuch.Invoke();
-            }
+                    GameOverLossDrinkTooMuch?.Invoke();
 
             yield return wait;
         }
