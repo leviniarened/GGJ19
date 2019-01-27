@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.SceneManagement;
+
 public class GameManager : MonoBehaviour
 {
     private Player _player;
@@ -19,6 +21,8 @@ public class GameManager : MonoBehaviour
         _player = FindObjectOfType<Player>();
         _enemy = GameObject.FindGameObjectWithTag("Enemy").transform;
         StartCoroutine("GameoverCheck");
+
+        GameOverVictory += Victory;
     }
 
     private IEnumerator GameoverCheck()
@@ -26,7 +30,8 @@ public class GameManager : MonoBehaviour
         WaitForSeconds wait = new WaitForSeconds(GameoverConditionCheckDelay);
         while (true)
         {
-            if (Mathf.Abs(_player.transform.position.x - _enemy.position.x) < _distToEnemyForVictory)
+            Debug.Log(_player.transform.position.x - _enemy.position.x);
+            if (_player.transform.position.x - _enemy.position.x < _distToEnemyForVictory)
                 GameOverVictory?.Invoke();
 
             else if (_player.Drink == 0 )
@@ -37,6 +42,11 @@ public class GameManager : MonoBehaviour
 
             yield return wait;
         }
+    }
+
+    private void Victory()
+    {
+        SceneManager.LoadScene(2);
     }
     
 }

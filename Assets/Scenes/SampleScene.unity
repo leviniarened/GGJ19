@@ -413,7 +413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c923492c6d54ff84d87cd7ed26a450cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _distToEnemyForVictory: 0.5
+  _distToEnemyForVictory: -1.5
 --- !u!1 &1292231434
 GameObject:
   m_ObjectHideFlags: 0
