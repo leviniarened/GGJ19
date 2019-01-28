@@ -17,6 +17,15 @@ public class MainGameAudioController : SoundController
         Invoke("MyHomeTounts", 2f);
     }
 
+    private void OnDestroy()
+    {
+        Bonus.OnPickUpFail -= MissTounts;
+        Bonus.OnPickUpSuccess -= PickupTount;
+        GarbageContainer.OnKickFail -= MissTounts;
+        GarbageContainer.OnKickSuccess -= TrashHit;
+        GarbageContainer.OnKickSuccess -= HitTounts;
+    }
+
     public void PickupTount(bool success)
     {
         if(success)

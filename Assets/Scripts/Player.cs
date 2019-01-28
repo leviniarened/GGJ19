@@ -94,6 +94,14 @@ public class Player : MonoBehaviour
         InputController.GrabRight += InputController_GrabRight;
     }
 
+    void OnDestroy()
+    {
+        InputController.LeftKick -= InputController_LeftKick;
+        InputController.RightKick -= InputController_RightKick;
+        InputController.GrabLeft -= InputController_GrabLeft;
+        InputController.GrabRight -= InputController_GrabRight;
+    }
+
     private void InputController_GrabRight()
     {
         var nearestBonus = GetNearestBonus();
